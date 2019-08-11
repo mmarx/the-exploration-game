@@ -1,0 +1,14 @@
+{
+  "pageTitle": {
+    "start": "Start",
+    "about": "About"
+  },
+  "footer": {
+    "poweredBy": "Powered by",
+    "sourceCode": "Source code available on {0}"
+  },
+  "errors": {
+    "pageNotFound": "Sorry, I could not find any page with that URI.",
+    "pageNotFoundDescription": "There seems to be an error in the URI you followed here."
+  }
+}

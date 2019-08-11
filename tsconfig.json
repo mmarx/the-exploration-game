@@ -26,6 +26,8 @@
       "webpack-env",
       "jest",
       "webpack",
+      "webpack-env",
+      "webpack",
       "webpack-env"
     ],
     "paths": {
@@ -40,7 +42,8 @@
       "scripthost"
     ],
     "plugins": [
-      { "name": "typescript-tslint-plugin"
+      {
+        "name": "typescript-tslint-plugin"
       }
     ]
   },

@@ -1,0 +1,14 @@
+{
+  "pageTitle": {
+    "start": "Start",
+    "about": "Über TEG"
+  },
+  "footer": {
+    "poweredBy": "Powered by",
+    "sourceCode": "Quelltext verfügbar auf {0}"
+  },
+  "errors": {
+    "pageNotFound": "Tut mir leid, ich konnte keine Seite unter dieser URI finden.",
+    "pageNotFoundDescription": "Die URI, die hierher führte, scheint fehlerhaft zu sein."
+  }
+}
