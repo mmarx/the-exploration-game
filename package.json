@@ -19,6 +19,7 @@
     "cwait": "^1.1.2",
     "lodash": "^4.17.15",
     "nprogress": "^0.2.0",
+    "sqid": "git+https://github.com/Wikidata/SQID.git",
     "vue": "^2.6.10",
     "vue-bootstrap-typeahead": "^0.2.6",
     "vue-class-component": "^7.0.2",

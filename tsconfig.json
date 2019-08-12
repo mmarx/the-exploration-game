@@ -26,13 +26,13 @@
       "webpack-env",
       "jest",
       "webpack",
-      "webpack-env",
-      "webpack",
-      "webpack-env"
     ],
     "paths": {
-      "@/*": [
+      "~/*": [
         "src/*"
+      ],
+      "@/*": [
+        "node_modules/sqid/src/*"
       ]
     },
     "lib": [

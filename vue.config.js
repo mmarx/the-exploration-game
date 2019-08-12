@@ -1,3 +1,8 @@
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   publicPath: (process.env.NODE_ENV === 'production'
                ? '/teg/'
@@ -9,5 +14,9 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: false
     }
-  }
+  },
+  chainWebpack: (config) => {
+    config.resolve.alias.set('~', resolve('src'))
+    config.resolve.alias.set('@', resolve('node_modules/sqid/src'))
+  },
 }
