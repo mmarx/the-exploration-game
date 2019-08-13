@@ -71,9 +71,9 @@
                atts
                (fn [x y] (contains? (set (E x)) y)))
         wdbound (jsonthing "wdbound")]
-    (println  ctx)
-    (println  L)
-    (println wdbound)
+    ;; (println  ctx)
+    ;; (println  L)
+    ;; (println wdbound)
     ;; (println "*****")
     (let [newimp (first (:implications (exploration-step ctx L)))
           thepremise (set  (map (fn [x] (str "(" x ")")) (premise newimp)))
@@ -81,9 +81,9 @@
       ;; (println thepremise)
       ;; (println theconclusion)
       (if (not (empty? thepremise))
-        (let [wd_counterexamples (wd/counterexample
+        (let [wd_counterexamples (wd/counterexamples
                                   (make-implication thepremise theconclusion) wdbound)]
-          (println wd_counterexamples)
+          ;; (println wd_counterexamples)
           [newimp wd_counterexamples])
         [newimp #{}]
         )
