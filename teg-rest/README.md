@@ -15,7 +15,13 @@ or
 ```shell
 lein repl
 ```
-which would result in the availability of 
+which would provide a REPL in which one can start the API server using:
+
+```clojure
+(-main)
+```
+
+Both will result in the availability of 
 
 http://127.0.0.1:4223/
 
