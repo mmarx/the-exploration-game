@@ -75,19 +75,20 @@
     ;; (println  L)
     ;; (println wdbound)
     ;; (println "*****")
-    (let [newimp (first (:implications (exploration-step ctx L)))
-          thepremise (set  (map (fn [x] (str "(" x ")")) (premise newimp)))
-          theconclusion  (set (map (fn [x] (str "(" x ")")) (conclusion newimp)))]
-      ;; (println thepremise)
-      ;; (println theconclusion)
-      (if (not (empty? thepremise))
-        (let [wd_counterexamples (wd/counterexamples
-                                  (make-implication thepremise theconclusion) wdbound)]
-          ;; (println wd_counterexamples)
-          [newimp wd_counterexamples])
-        [newimp #{}]
-        )
-      )))
+    (let [newimp (first (:implications (exploration-step ctx L)))]
+      (when (not (nil? newimp))
+        (let [thepremise (set  (map (fn [x] (str "(" x ")")) (premise newimp)))
+              theconclusion  (set (map (fn [x] (str "(" x ")")) (conclusion newimp)))]
+          ;; (println thepremise)
+          ;; (println theconclusion)
+          (if (not (empty? thepremise))
+            (let [wd_counterexamples (wd/counterexamples
+                                      (make-implication thepremise theconclusion) wdbound)]
+              ;; (println wd_counterexamples)
+              [newimp wd_counterexamples])
+            [newimp #{}]
+            )
+          )))))
 
 (defn exploration-handler [req]
   (let [params (:params req)
@@ -98,10 +99,10 @@
         request {"properties" properties
                  "counterexamples" counterexamples
                  "implications" implications
-                 "wdbound" limit}
+                 "wdbound" (read-string limit)}
         [new-implication counterexamples] (explore request)
-        head (conclusion new-implication)
-        body (premise new-implication)]
+        head (if (nil? new-implication) [] (conclusion new-implication))
+        body (if (nil? new-implication) [] (premise new-implication))]
     {:status 200
      :headers {"Content-Type" "tex/json"}
      :body (str (json/write-str
