@@ -19,4 +19,12 @@ module.exports = {
     config.resolve.alias.set('~', resolve('src'))
     config.resolve.alias.set('@', resolve('node_modules/sqid/src'))
   },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4223',
+        pathRewrite: {'^/api' : ''}
+      }
+    }
+  },
 }
