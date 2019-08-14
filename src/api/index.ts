@@ -3,23 +3,27 @@ import { Atom, Implication, EntityId, Counterexamples,
 
 import { http } from '@/http'
 
-const backendEndpoint = 'http://127.0.0.1:4223/explore'
+const backendEndpoint = '//localhost:8080/api/explore'
 
-function performApiRequest(request: ExplorationRequest): ExplorationResult {
-  return http.post(endpoint, {
-    params: request,
+async function performApiRequest(request: ExplorationRequest): Promise<ExplorationResult> {
+  const response = await http.get(backendEndpoint, {
+    params: request ,
   })
+
+  return response.data
 }
 
 export async function getNextExplorationStep(
   properties: EntityId[],
   counterexamples: Counterexamples,
   implications: Implication[],
-  maxCounterexamples: number = 5): ExplorationResult {
+  maxCounterexamples: number = 5): Promise<ExplorationResult> {
   const response = await performApiRequest({
-    properties:
+    properties,
     counterexamples,
     implications,
-    wdbound: maxCounterexamples,
+    maxCounterexamples,
   })
+
+  return response
 }
