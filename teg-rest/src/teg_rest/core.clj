@@ -90,14 +90,24 @@
       )))
 
 (defn exploration-handler [req]
-  (let [request (json/read-str (:request (:params req)))
-        reply (explore request)]
+  (let [params (:params req)
+        properties (:properties params)
+        counterexamples (json/read-str (:counterexamples params))
+        implications (map json/read-str (:implications params))
+        limit (:maxCounterexamples params)
+        request {"properties" properties
+                 "counterexamples" counterexamples
+                 "implications" implications
+                 "wdbound" limit}
+        [new-implication counterexamples] (explore request)
+        head (conclusion new-implication)
+        body (premise new-implication)]
     {:status 200
      :headers {"Content-Type" "tex/json"}
      :body (str (json/write-str
-                 {"counterexamples" (second reply)
-                  "newImplication" {"head" (conclusion (first reply))
-                                    "body" (premise (first reply))
+                 {"counterexamples" counterexamples
+                  "newImplication" {"head" head
+                                    "body" body
                                     }}))}))
 
 
