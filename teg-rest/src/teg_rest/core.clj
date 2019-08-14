@@ -47,7 +47,7 @@
          last         (close-under-implications implications #{}),
          ctx          ctx]
     (if (not last)
-      {:implications (difference (set implications) (set input-implications)) :context ctx} 
+      {:implications (difference (set implications) (set input-implications)) :context ctx}
       (let [conclusion-from-last (contexts/context-attribute-closure ctx last)]
         (if (= last conclusion-from-last)
           (recur implications
@@ -107,7 +107,7 @@
      :body    (json/write-str
                {
                 "counterexamples" (second reply)
-                "new-implication" {
+                "newImplication" {
                                    "head" (conclusion (first reply)),
                                    "body" (premise (first reply))}
                 })}))
@@ -136,6 +136,3 @@
   [& args]
   (reset! server (run-server (wrap-defaults #'app-routes (assoc-in
   site-defaults [:security :anti-forgery] false)) {:port 4223})))
-
-
-
