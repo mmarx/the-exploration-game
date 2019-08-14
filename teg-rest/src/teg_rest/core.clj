@@ -90,9 +90,15 @@
       )))
 
 (defn exploration-handler [req]
-        {:status  200
-         :headers {"Content-Type" "text/json"}
-         :body    (str (json/write-str {"nothing" "nothing"}))})
+  (let [request (json/read-str (:request (:params req)))
+        reply (explore request)]
+    {:status 200
+     :headers {"Content-Type" "tex/json"}
+     :body (str (json/write-str
+                 {"counterexamples" (second reply)
+                  "newImplication" {"head" (conclusion (first reply))
+                                    "body" (premise (first reply))
+                                    }}))}))
 
 
 (defn exploration-post [req]
