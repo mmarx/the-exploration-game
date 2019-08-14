@@ -1,20 +1,16 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-
-    <sqid-image file="Octopus salutii Merculiano.jpg" width="520" />
+    <teg-game />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from '~/components/HelloWorld.vue'
-import SqidImage from '@/components/SqidImage.vue'
+import TegGame from '~/components/TegGame.vue'
 
 @Component({
   components: {
-    HelloWorld,
-    SqidImage,
+    'teg-game': TegGame,
   },
 })
 export default class Home extends Vue {}

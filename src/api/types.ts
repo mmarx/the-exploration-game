@@ -1,5 +1,5 @@
-import { EntityId } from '@/api/types'
-export { EntityId } from '@/api/types'
+import { EntityId } from '@/store/entity/claims/types'
+export { EntityId } from '@/store/entity/claims/types'
 
 export type Atom = EntityId
 export interface Counterexamples {
@@ -20,5 +20,16 @@ export interface ExplorationRequest {
   properties: EntityId[],
   counterexamples: Counterexamples,
   implications: Implication[],
-  wdbound: number,
+  maxCounterexamples: number,
+}
+
+export interface GameConfiguration {
+  properties: EntityId[],
+  maxCounterexamples: number,
+}
+
+export class GameOverError extends Error {
+  constructor() {
+    super('Game over, Player one. Be vigilant.')
+  }
 }
