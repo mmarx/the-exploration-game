@@ -1,8 +1,8 @@
 <template>
   <b-navbar toggleable="lg" type="light" fill>
     <b-navbar-brand to="/">
-      <!-- <img src="../assets/logo.svg" alt="TEG logo"> -->
-      The Exploration Game
+      <span><sqid-image file="Wikidata-logo-with-magnifying-glass-icon.svg" width="100" />
+        The Exploration Game</span>
     </b-navbar-brand>
     <b-navbar-toggle target="mainNavbar" />
     <b-collapse is-nav id="mainNavbar">

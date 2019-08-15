@@ -3,6 +3,7 @@ import { MutationTree } from 'vuex'
 import { TegState } from './types'
 import { EntityId, Counterexamples,
          GameConfiguration, ExplorationResult } from '~/api/types'
+import { entityValue } from '@/api/sparql'
 
 export const mutations: MutationTree<TegState> = {
   newGame(state, configuration) {
@@ -15,7 +16,18 @@ export const mutations: MutationTree<TegState> = {
   },
   newCandidate(state, result) {
     state.candidate = result.newImplication || null
-    state.counterCandidates = result.Counterexamples || null
+    state.counterCandidates = null
+
+    if (result.counterexamples) {
+      const properties = result.newImplication.body || null
+      const counters = {}
+
+      for (const item of result.counterexamples) {
+        counters[entityValue(item)] = properties
+      }
+
+      state.counterCandidates = counters
+    }
   },
   acceptImplication(state) {
     if (state.candidate) {
