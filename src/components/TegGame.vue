@@ -22,7 +22,7 @@
 
         <div><h2>properties</h2>
           <p>
-            <ul>
+            <ul class="comma-separated">
               <li v-for="(propertyId, idx) of getProperties" :key="idx">
                 <entity-link :entityId="propertyId" />
               </li>
@@ -32,7 +32,7 @@
 
         <div><h2>implications found so far</h2>
           <p>
-            <ul>
+            <ul class="comma-separated">
               <li v-for="(implication, idx) of getImplications" :key="idx">
                 <implication :implication="implication" />
               </li>

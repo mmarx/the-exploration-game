@@ -1,6 +1,6 @@
 <template>
   <span>
-    <ul>
+    <ul class="comma-separated">
       <li v-for="(atom, idx) of atoms" :key="idx">
         <entity-link :entityId="atom" />
       </li>

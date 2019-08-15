@@ -60,6 +60,24 @@ export default class App extends Vue {
     }
   }
 }
+
+.comma-separated {
+  display: inline;
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: inline;
+  }
+
+  li::after {
+    content: ", ";
+  }
+
+  li:last-child::after {
+    content: "";
+  }
+}
 </style>
 
 <style src="nprogress/nprogress.css" />
