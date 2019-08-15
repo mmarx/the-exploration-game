@@ -1,16 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <app-navbar />
+    <router-view />
+    <app-footer />
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import AppNavbar from '~/components/AppNavbar.vue'
+import AppFooter from '~/components/AppFooter.vue'
+// import EntityLink from '@/components/EntityLink.vue'
+// import Snak from '@/components/Snak.vue'
+// import DataValue from '@/components/DataValue.vue'
+import SqidImage from '@/components/SqidImage.vue'
+import SqidBars from '@/components/SqidBars.vue'
+import SqidCollapseButton from '@/components/SqidCollapseButton.vue'
+import SqidCollapsibleCard from '@/components/SqidCollapsibleCard.vue'
+
+// Vue.component('entity-link', EntityLink)
+// Vue.component('snak', Snak)
+// Vue.component('data-value', DataValue)
+Vue.component('sqid-image', SqidImage)
+Vue.component('sqid-bars', SqidBars)
+Vue.component('sqid-collapse-button', SqidCollapseButton)
+Vue.component('sqid-collapsible-card', SqidCollapsibleCard)
+
+@Component({
+  components: {
+    'app-navbar': AppNavbar,
+    'app-footer': AppFooter,
+  }})
+export default class App extends Vue {
+}
+</script>
+
 <style lang="less">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -27,3 +54,7 @@
   }
 }
 </style>
+
+<style src="nprogress/nprogress.css" />
+<style src="bootstrap/dist/css/bootstrap.css" />
+<style src="bootstrap-vue/dist/bootstrap-vue.css" />
