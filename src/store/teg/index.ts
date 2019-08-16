@@ -12,6 +12,7 @@ export const state: TegState = {
   implications: [],
   candidate: null,
   counterCandidates: null,
+  sessionId: null,
 }
 
 export const teg: Module<TegState, RootState> = {

@@ -36,3 +36,4 @@ yarn-error.log*
 *~
 public/oauth/vendor/
 flycheck_*.*
+/teg-rest/teg-rest.log

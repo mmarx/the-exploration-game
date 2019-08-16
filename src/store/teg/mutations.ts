@@ -4,6 +4,7 @@ import { TegState } from './types'
 import { EntityId, Counterexamples,
          GameConfiguration, ExplorationResult } from '~/api/types'
 import { entityValue } from '@/api/sparql'
+import { v1 as uuidv1 } from 'uuid'
 
 export const mutations: MutationTree<TegState> = {
   newGame(state, configuration) {
@@ -13,6 +14,7 @@ export const mutations: MutationTree<TegState> = {
     state.counterexamples = {}
     state.candidate = null
     state.counterCandidates = null
+    state.sessionId = uuidv1()
   },
   newCandidate(state, result) {
     state.candidate = result.newImplication || null
@@ -20,7 +22,7 @@ export const mutations: MutationTree<TegState> = {
 
     if (result.counterexamples) {
       const properties = result.newImplication.body || null
-      const counters = {}
+      const counters: Counterexamples = {}
 
       for (const item of result.counterexamples) {
         counters[entityValue(item)] = properties

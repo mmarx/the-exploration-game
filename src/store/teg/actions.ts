@@ -8,6 +8,7 @@ async function step(state: TegState) {
   const result = await getNextExplorationStep(state.properties,
                                               state.counterexamples,
                                               state.implications,
+                                              state.sessionId,
                                               state.maxCounterexamples)
 
   if (!result.newImplication || !result.newImplication.head) {

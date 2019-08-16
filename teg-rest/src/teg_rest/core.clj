@@ -97,7 +97,7 @@
         counterexamples (json/read-str (:counterexamples params))
         implications (map json/read-str (:implications params))
         limit (:maxCounterexamples params)
-        sessionID (if (nil? (:sessionID params)) "0" (:sessionID params))
+        sessionID (if (nil? (:sessionId params)) "0" (:sessionId params))
         request {"properties" properties
                  "counterexamples" counterexamples
                  "implications" implications

@@ -1,10 +1,11 @@
 <template>
   <span>
-    <ul class="comma-separated">
+    <ul class="comma-separated" v-if="atoms.length">
       <li v-for="(atom, idx) of atoms" :key="idx">
         <entity-link :entityId="atom" />
       </li>
     </ul>
+    <span v-else>[empty]</span>
   </span>
 </template>
 

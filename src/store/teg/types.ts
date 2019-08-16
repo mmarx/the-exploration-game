@@ -7,4 +7,5 @@ export interface TegState {
   implications: Implication[],
   candidate: Implication | null,
   counterCandidates: Counterexamples | null,
+  sessionId: string | null,
 }
