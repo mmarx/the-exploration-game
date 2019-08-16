@@ -4,6 +4,7 @@
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]
+            [clojure.tools.logging :as log]
             [clojure.pprint :as pp]
             [clojure.string :as str]
             [clojure.data.json :as json]
@@ -96,6 +97,7 @@
         counterexamples (json/read-str (:counterexamples params))
         implications (map json/read-str (:implications params))
         limit (:maxCounterexamples params)
+        sessionID (if (nil? (:sessionID params)) "0" (:sessionID params))
         request {"properties" properties
                  "counterexamples" counterexamples
                  "implications" implications
@@ -103,6 +105,7 @@
         [new-implication counterexamples] (explore request)
         head (if (nil? new-implication) [] (conclusion new-implication))
         body (if (nil? new-implication) [] (premise new-implication))]
+    (log/info "ID:" sessionID "request" request)
     {:status 200
      :headers {"Content-Type" "tex/json"}
      :body (str (json/write-str

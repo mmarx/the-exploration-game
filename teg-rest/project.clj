@@ -8,6 +8,8 @@
                  [http-kit "2.3.0"]
                  [ring/ring-defaults "0.3.2"]
                  [org.clojure/data.json "0.2.6"]
+                 [org.clojure/tools.logging "0.5.0"]
+                 [ch.qos.logback/logback-classic "1.1.1"]
                  [conexp-clj "2.0.1-SNAPSHOT"]]
   :main ^:skip-aot teg-rest.core
   :target-path "target/%s"
