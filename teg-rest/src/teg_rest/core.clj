@@ -154,5 +154,8 @@
 
 (defn -main
   [& args]
-  (reset! server (run-server (wrap-defaults #'app-routes (assoc-in
-  site-defaults [:security :anti-forgery] false)) {:port 4223})))
+  (reset! server (run-server
+                  (wrap-defaults #'app-routes
+                                 (assoc-in site-defaults
+                                           [:security :anti-forgery] false)) {:port 4223}))
+  (log/info "server started"))
