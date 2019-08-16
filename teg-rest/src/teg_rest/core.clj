@@ -107,7 +107,7 @@
         body (if (nil? new-implication) [] (premise new-implication))]
     (log/info "ID:" sessionID "request" request)
     {:status 200
-     :headers {"Content-Type" "tex/json"}
+     :headers {"Content-Type" "text/json"}
      :body (str (json/write-str
                  {"counterexamples" counterexamples
                   "newImplication" {"head" head
