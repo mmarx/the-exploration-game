@@ -34,7 +34,7 @@
             </p>
           </div>
           <div v-else>
-            <p>Congratulations, you have <emph>won</emph> The Exploration Game!</p>
+            <p>Congratulations, you have <i>won</i> The Exploration Game!</p>
           </div>
         </sqid-collapsible-card>
 

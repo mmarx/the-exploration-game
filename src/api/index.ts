@@ -3,7 +3,7 @@ import { Atom, Implication, EntityId, Counterexamples,
 
 import { http } from '@/http'
 
-const backendEndpoint = '//localhost:8080/api/explore'
+const backendEndpoint = '/teg/api/explore'
 
 async function performApiRequest(request: ExplorationRequest): Promise<ExplorationResult> {
   const response = await http.get(backendEndpoint, {
