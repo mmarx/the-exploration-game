@@ -77,19 +77,17 @@
     ;; (println wdbound)
     ;; (println "*****")
     (let [newimp (first (:implications (exploration-step ctx L)))]
-      (when (not (nil? newimp))
+      (if (not (nil? newimp))
         (let [thepremise (set  (map (fn [x] (str "(" x ")")) (premise newimp)))
               theconclusion  (set (map (fn [x] (str "(" x ")")) (conclusion newimp)))]
           ;; (println thepremise)
           ;; (println theconclusion)
-          (if (not (empty? thepremise))
-            (let [wd_counterexamples (wd/counterexamples
-                                      (make-implication thepremise theconclusion) wdbound)]
-              ;; (println wd_counterexamples)
-              [newimp wd_counterexamples])
-            [newimp #{}]
-            )
-          )))))
+          (let [wd_counterexamples (wd/counterexamples
+                                    (make-implication thepremise theconclusion) wdbound)]
+            ;; (println wd_counterexamples)
+            [newimp wd_counterexamples])
+          )
+        [newimp #{}]))))
 
 (defn exploration-handler [req]
   (let [params (:params req)
