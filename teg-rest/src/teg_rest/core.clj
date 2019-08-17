@@ -121,7 +121,7 @@
 
 (defn howmany-handler [req]
   (let [params (:params req)
-        implication (json/read-str (:implications params))
+        implication (json/read-str (:implication params))
         thepremise (set  (map (fn [x] (str "(" x ")")) (implication "body")))
         theconclusion  (set (map (fn [x] (str "(" x ")")) (implication "head")))
         sessionID (if (nil? (:sessionId params)) "0" (:sessionId params))
@@ -135,7 +135,7 @@
      :body (str (json/write-str
                  {"implication" {"body" (premise theimplication)
                                  "head" (conclusion theimplication)}
-                  "number-of-counterexamples" thenumber}))}))
+                  "numberOfCounterexamples" thenumber}))}))
 
 
 ;;; The webapp and stuff
@@ -145,10 +145,8 @@
   (GET "/teg/api/" [] simple-body-page)
   (GET "/version" [] version)
   (GET "/teg/api/version" [] version)
-  ;;  (GET "/request" [] request-example)
   (GET "/teg/api/explore" [] exploration-handler)
   (GET "/teg/api/howmany" [] howmany-handler)
-  (GET "/explore" [] exploration-handler)
   (route/not-found "Error, page not found!"))
 
 (defonce server (atom nil))

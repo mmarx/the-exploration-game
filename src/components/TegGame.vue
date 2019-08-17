@@ -22,8 +22,8 @@
             </p>
 
             <div v-if="candidateCounterexamples.length">
-              <p>There are items that do not satisfy this
-                implication. Are they valid counterexamples?
+              <p>There are <span v-if="numCounterExamples">{{ numCounterExamples }} </span>items that do not satisfy this
+                implication. <span v-if="numCounterExamples">Here are some of them. </span>Are they valid counterexamples?
                 <ul>
                   <li v-for="([itemId, properties], idx) of candidateCounterexamples"
                       :key="idx">
@@ -99,10 +99,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Watch, Vue } from 'vue-property-decorator'
 import { Getter, Action, Mutation } from 'vuex-class'
 import { EntityId, Counterexamples, Implication,
          ExplorationResult, GameConfiguration } from '~/api/types'
+import { getNumberOfCounterexamples } from '~/api/index'
 import ImplicationVue from '~/components/Implication.vue'
 import CounterexampleVue from '~/components/Counterexample.vue'
 
@@ -126,6 +127,19 @@ export default class TegGame extends Vue {
   @Mutation private addCounterexamples!: (counterexamples: Counterexamples) => void
 
   private counter: number = 0
+  private numCounterExamples = 0
+  private implication: Implication | null = null
+
+  @Watch('implication')
+  private async onCandidateChanged() {
+    if (!this.implication) {
+      this.numCounterExamples = 0
+    } else {
+      const num = await getNumberOfCounterexamples(this.implication)
+
+      this.numCounterExamples = num
+    }
+  }
 
   private get candidateCounterexamples() {
     const candidates = this.getCandidateCounterexamples || {}
@@ -134,9 +148,9 @@ export default class TegGame extends Vue {
   }
 
   private get won() {
-    const candidate = this.getCandidateImplication
+    this.implication = this.getCandidateImplication
 
-    return candidate && !candidate.head.length && !candidate.body.length
+    return this.implication && !this.implication.head.length && !this.implication.body.length
   }
 
   private created() {
@@ -151,13 +165,13 @@ export default class TegGame extends Vue {
   }
 
   private onReject() {
-    const candidate = this.getCandidateImplication || { head: [], body: [] }
+    this.implication = this.getCandidateImplication || { head: [], body: [] }
     const counters = this.candidateCounterexamples || []
 
     if (!counters.length) {
       ++this.counter
       const item = `artificial-counterexample-${this.counter}`
-      const counterexample: Counterexamples = { [item]: candidate.body }
+      const counterexample: Counterexamples = { [item]: this.implication.body }
       this.addCounterexamples(counterexample)
     }
 

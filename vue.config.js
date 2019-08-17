@@ -21,9 +21,8 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/api': {
+      '/teg/api': {
         target: 'http://localhost:4223',
-        pathRewrite: {'^/teg/api' : ''}
       }
     }
   },
