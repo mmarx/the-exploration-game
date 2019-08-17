@@ -113,25 +113,6 @@
                                     "body" body
                                     }}))}))
 
-
-(defn exploration-post [req]
-  (let [rdr (clojure.java.io/reader (:body req))
-        body (slurp rdr)
-        thereq (json/read-str body)
-        reply (explore thereq)]
-    ;; (println (premise (first reply)))
-    ;; (println (conclusion (first reply)))
-    {:status  200
-     :headers {"Content-Type" "text/json"}
-     :body    (json/write-str
-               {
-                "counterexamples" (second reply)
-                "newImplication" {
-                                   "head" (conclusion (first reply)),
-                                   "body" (premise (first reply))}
-                })}))
-
-
 ;;; The webapp and stuff
 
 (defroutes app-routes
