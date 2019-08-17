@@ -149,8 +149,6 @@
   (GET "/teg/api/explore" [] exploration-handler)
   (GET "/teg/api/howmany" [] howmany-handler)
   (GET "/explore" [] exploration-handler)
-  (POST "/teg/api/explore" [] exploration-post)
-  (POST "/explore" [] exploration-post)
   (route/not-found "Error, page not found!"))
 
 (defonce server (atom nil))
