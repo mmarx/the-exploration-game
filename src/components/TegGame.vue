@@ -155,7 +155,7 @@ export default class TegGame extends Vue {
 
   private created() {
     this.newGame({
-      properties: ['P27', 'P463', 'P101', 'P31', 'P106'],
+      properties: ['P50', 'P495', 'P136', 'P364'],
       maxCounterexamples: 5,
     })
   }
