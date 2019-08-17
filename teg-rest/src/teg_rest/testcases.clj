@@ -555,3 +555,27 @@
       (println "Failed, exception: " error)
       (println "HTTP GET success: " status))
     (println body)))
+
+;; examples for /api/howmany
+(defn test-hm1 [] ;; real world test from previous experiments
+  (let [{:keys [status headers body error] :as resp}
+        @(http/get "http://127.0.0.1:4223/teg/api/howmany"
+                   {:query-params 
+                    {:implications [(json/write-str {"head" ["P619"] "body" ["P247" "P375"]})]
+                     }})]
+    (if error
+      (println "Failed, exception: " error)
+      (println "HTTP GET success: " status))
+    (println body)))
+
+
+(defn test-hm2 [] ;; real world test from previous experiments
+  (let [{:keys [status headers body error] :as resp}
+        @(http/get "http://127.0.0.1:4223/teg/api/howmany"
+                   {:query-params 
+                    {:implications [(json/write-str {"head" ["P619"] "body" ["P247"]})]
+                     }})]
+    (if error
+      (println "Failed, exception: " error)
+      (println "HTTP GET success: " status))
+    (println body)))

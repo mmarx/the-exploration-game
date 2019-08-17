@@ -114,6 +114,29 @@
                   "newImplication" {"head" head
                                     "body" body
                                     }}))}))
+(defn howmany
+  "Computes the number counterexamples for a of implication."
+  [imp]
+  (wd/number-of-counterexamples imp))
+
+(defn howmany-handler [req]
+  (let [params (:params req)
+        implication (json/read-str (:implications params))
+        thepremise (set  (map (fn [x] (str "(" x ")")) (implication "body")))
+        theconclusion  (set (map (fn [x] (str "(" x ")")) (implication "head")))
+        sessionID (if (nil? (:sessionId params)) "0" (:sessionId params))
+        theimplication (make-implication thepremise theconclusion)
+        thenumber (howmany theimplication)]
+    (log/info "Numberequest;" "ID:" sessionID "request:" theimplication)
+    (log/info "Numberequest;" "ID:" sessionID "request:" theimplication
+              "result:" thenumber)
+    {:status 200
+     :headers {"Content-Type" "text/json"}
+     :body (str (json/write-str
+                 {"implication" {"body" (premise theimplication)
+                                 "head" (conclusion theimplication)}
+                  "number-of-counterexamples" thenumber}))}))
+
 
 ;;; The webapp and stuff
 
@@ -124,6 +147,7 @@
   (GET "/teg/api/version" [] version)
   ;;  (GET "/request" [] request-example)
   (GET "/teg/api/explore" [] exploration-handler)
+  (GET "/teg/api/howmany" [] howmany-handler)
   (GET "/explore" [] exploration-handler)
   (POST "/teg/api/explore" [] exploration-post)
   (POST "/explore" [] exploration-post)
