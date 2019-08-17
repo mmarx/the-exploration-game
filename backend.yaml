@@ -1,0 +1,91 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: teg-backend
+  namespace: teg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: teg-backend
+      tier: backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: teg-backend
+        tier: backend
+    spec:
+      containers:
+      - command:
+        - /usr/bin/java
+        - -jar
+        - teg-rest-0.0.1-SNAPSHOT-standalone.jar
+        env:
+        - name: HOME
+          value: /data/project/teg/
+        image: docker-registry.tools.wmflabs.org/toollabs-jdk8-base:latest
+        imagePullPolicy: Always
+        name: backend
+        ports:
+        - containerPort: 4223
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: 125m
+            memory: 4Gi
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /public/dumps/
+          name: dumps
+        - mountPath: /data/project/
+          name: home
+        - mountPath: /etc/wmcs-project
+          name: wmcs-project
+        - mountPath: /mnt/nfs/
+          name: nfs
+        - mountPath: /data/scratch/
+          name: scratch
+        workingDir: /data/project/teg/
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /public/dumps/
+        name: dumps
+      - hostPath:
+          path: /data/project/
+        name: home
+      - hostPath:
+          path: /etc/wmcs-project
+        name: wmcs-project
+      - hostPath:
+          path: /mnt/nfs/
+        name: nfs
+      - hostPath:
+          path: /data/scratch/
+        name: scratch
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: teg-backend
+spec:
+  selector:
+    name: teg-backend
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 4223
+    targetPort: http
