@@ -22,7 +22,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:body (json/write-str
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P1", "P3", "P4", "P10", "P20", "P30"],
                              "counterexamples" {
                                                  "q1234" ["P4", "P3", "P10"],
@@ -43,7 +43,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params 
-                    {"sessionID" "123456789",
+                    {"sessionId" "123456789",
                      "properties" ["P1" "P3" "P4" "P10" "P20" "P30"],
                      :counterexamples  (json/write-str {
                                                         "q1234" ["P4", "P3", "P10"],
@@ -67,7 +67,7 @@
    (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:query-params 
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P364" "P161" "P495"],
                              :counterexamples  (json/write-str {
                                                                 "Qartificial" []
@@ -85,7 +85,7 @@
    (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:query-params 
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P364", "P161", "P495"],
                              :counterexamples (json/write-str {
                                                                "Qartificial" [],
@@ -103,7 +103,7 @@
    (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:query-params 
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P364", "P161", "P495"],
                              :counterexamples (json/write-str {
                                                                "Qartificial" [],
@@ -122,7 +122,7 @@
    (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:query-params 
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P364", "P161", "P495"],
                              :counterexamples (json/write-str {
                                                                "Qartificial" [],
@@ -142,7 +142,7 @@
    (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:query-params 
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P364", "P161", "P495"],
                              :counterexamples (json/write-str {
                                                                "Qartificial" [],
@@ -163,7 +163,7 @@
    (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                     {:query-params 
-                            {"sessionID" 123456789,
+                            {"sessionId" 123456789,
                              "properties" ["P364", "P161", "P495"],
                              :counterexamples (json/write-str {
                                                                "Qartificial" [],
@@ -186,7 +186,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -203,7 +203,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" [],
@@ -221,7 +221,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" [],
@@ -240,7 +240,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" [],
@@ -260,7 +260,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" [],
@@ -281,7 +281,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" [],
@@ -303,7 +303,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P247" "P375" "P619"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" [],
@@ -329,7 +329,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P272" "P17" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -350,7 +350,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P47" "P17" "P138" "P131"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -371,7 +371,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P36" "P138" "P131" "P17"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -392,7 +392,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P27" "P463" "P101" "P31" "P106"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -412,7 +412,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -430,7 +430,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -449,7 +449,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -470,7 +470,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -491,7 +491,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -513,7 +513,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
@@ -536,7 +536,7 @@
   (let [{:keys [status headers body error] :as resp}
         @(http/get "http://127.0.0.1:4223/explore"
                    {:query-params
-                    {"sessionID" 987654321
+                    {"sessionId" 987654321
                      "properties" ["P179" "P123" "P136"],
                      :counterexamples (json/write-str {
                                                        "Qartificial" []
