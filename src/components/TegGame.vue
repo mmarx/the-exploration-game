@@ -5,33 +5,37 @@
         <h1>The Exploration Game</h1>
 
         <sqid-collapsible-card id="candidate" header="Current Candidate">
-          <div>
-            <p v-if="getCandidateImplication">
-              <implication :implication="getCandidateImplication" />
+          <div v-if="!won">
+            <div>
+              <p v-if="getCandidateImplication">
+                <implication :implication="getCandidateImplication" />
+              </p>
+            </div>
+
+            <div v-if="candidateCounterexamples.length">
+              <p>There are items that do not satisfy this
+                implication. Are they valid counterexamples?
+                <ul>
+                  <li v-for="([itemId, properties], idx) of candidateCounterexamples"
+                      :key="idx">
+                    <counterexample :item="itemId" :properties="properties" />
+                  </li>
+                </ul>
+              </p>
+            </div>
+
+            <p>
+              <b-button variant="success"
+                        @click="onAccept">
+                <font-awesome-icon icon="check" />accept</b-button>
+              <b-button variant="danger"
+                        @click="onReject">
+                <font-awesome-icon icon="times" />reject</b-button>
             </p>
           </div>
-
-          <div v-if="candidateCounterexamples.length">
-            <p>There are items that do not satisfy this
-            implication. Are they valid counterexamples?
-              <ul>
-                <li v-for="([itemId, properties], idx) of candidateCounterexamples"
-                    :key="idx">
-                  <counterexample :item="itemId" :properties="properties" />
-                </li>
-              </ul>
-            </p>
+          <div v-else>
+            <p>Congratulations, you have <emph>won</emph> The Exploration Game!</p>
           </div>
-
-          <p>
-            <b-button variant="success"
-                      @click="onAccept">
-              <font-awesome-icon icon="check" />accept</b-button>
-            <b-button variant="danger"
-                      @click="onReject"
-                      disabled>
-              <font-awesome-icon icon="times" />reject</b-button>
-          </p>
         </sqid-collapsible-card>
 
         <sqid-collapsible-card id="state" header="Game State">
@@ -107,6 +111,12 @@ export default class TegGame extends Vue {
     const candidates = this.getCandidateCounterexamples || {}
 
     return Object.entries(candidates)
+  }
+
+  private get won() {
+    const candidate = this.getCandidateImplication
+
+    return candidate && !candidate.head.length && !candidate.body.length
   }
 
   private created() {
