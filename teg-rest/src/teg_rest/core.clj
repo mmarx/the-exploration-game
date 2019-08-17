@@ -18,8 +18,9 @@
 
 
 (def banner
-  (str "https://tools.wmflabsorg/teg/ using conexp-clj/"
-       (conexp-version)))
+  (str "\nhttps://tools.wmflabsorg/teg/ \nusing conexp-clj/"
+       (conexp-version)
+       "\n\n"))
 
 ; Simple Body Page
 (defn simple-body-page [req]
@@ -135,9 +136,13 @@
 
 (defroutes app-routes
   (GET "/" [] simple-body-page)
+  (GET "/teg/api/" [] simple-body-page)
   (GET "/version" [] version)
-;;  (GET "/request" [] request-example)
+  (GET "/teg/api/version" [] version)
+  ;;  (GET "/request" [] request-example)
+  (GET "/teg/api/explore" [] exploration-handler)
   (GET "/explore" [] exploration-handler)
+  (POST "/teg/api/explore" [] exploration-post)
   (POST "/explore" [] exploration-post)
   (route/not-found "Error, page not found!"))
 
