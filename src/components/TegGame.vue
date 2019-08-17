@@ -12,6 +12,15 @@
               </p>
             </div>
 
+            <p>
+              <b-button variant="success"
+                        @click="onAccept">
+                <font-awesome-icon icon="check" />accept this implication</b-button>
+              <b-button variant="danger"
+                        @click="onReject">
+                <font-awesome-icon icon="times" />reject this implication</b-button>
+            </p>
+
             <div v-if="candidateCounterexamples.length">
               <p>There are items that do not satisfy this
                 implication. Are they valid counterexamples?
@@ -23,15 +32,6 @@
                 </ul>
               </p>
             </div>
-
-            <p>
-              <b-button variant="success"
-                        @click="onAccept">
-                <font-awesome-icon icon="check" />accept</b-button>
-              <b-button variant="danger"
-                        @click="onReject">
-                <font-awesome-icon icon="times" />reject</b-button>
-            </p>
           </div>
           <div v-else>
             <p>Congratulations, you have <i>won</i> The Exploration Game!</p>
@@ -74,6 +74,26 @@
     </template>
     <template v-slot:sidebar>
       <h2>How to play</h2>
+      <ol>
+        <li>Select a set of properties to play with (currently, we
+          only offer a pre-selected set here)</li>
+        <li>The Exploration game will ask you questions
+        about <i>implications</i>: Considering all items with
+        statements for a given set of properties, do they all also
+        have statements for the properties in the conclusion of the
+          implication?</li>
+        <li>For every such implication, you can choose
+        to <i>accept</i> it, if it is a valid implication,
+        or <i>reject</i> it, if is not.</li>
+        <li>To guide you in your decision, you will
+        see <i>counterexamples</i>, i.e., items that satisfy the
+        premise of the implication, but not the
+        conclusion. Counterexamples need not be valid, they might also
+          be missing statements.</li>
+        <li>Based on your choice, The Exploration Game computes the
+        next possible implication that is consistent with your
+        choices, until all minimal implications have been found.</li>
+      </ol>
     </template>
   </sqid-bars>
 </template>
@@ -132,10 +152,15 @@ export default class TegGame extends Vue {
 
   private onReject() {
     const candidate = this.getCandidateImplication || { head: [], body: [] }
-    ++this.counter
-    const item = `counter-${this.counter}`
-    const counterexample: Counterexamples = { [item]: candidate.body }
-    this.addCounterexamples(counterexample)
+    const counters = this.candidateCounterexamples || []
+
+    if (!counters.length) {
+      ++this.counter
+      const item = `artificial-counterexample-${this.counter}`
+      const counterexample: Counterexamples = { [item]: candidate.body }
+      this.addCounterexamples(counterexample)
+    }
+
     this.acceptCounterexamples()
   }
 }

@@ -47,8 +47,9 @@ export const mutations: MutationTree<TegState> = {
   },
   acceptCounterexamples(state) {
     if (state.counterCandidates) {
-      state.counterexamples = Object.assign(state.counterexamples,
-                                            state.counterCandidates!)
+      const [item, properties] = Object.entries(state.counterCandidates!)[0]
+
+      Vue.set(state.counterexamples, item, properties)
     }
     state.candidate = null
     state.counterCandidates = null
