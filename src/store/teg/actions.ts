@@ -34,8 +34,25 @@ export const actions: ActionTree<TegState, RootState> = {
 
     return candidate
   },
-  async rejectImplication({ commit, state }, counterexamples: Counterexamples) {
-    commit('addCounterexamples', counterexamples)
+  async rejectImplication({ commit, state, getters, dispatch }, counterexamples: Counterexamples) {
+    const counters: any = counterexamples
+    const data = {}
+    const props = getters.getProperties()
+
+    for (const item of Object.keys(counters)) {
+      data[item] = await disptach('getEntityData', item) as any
+      const properties = []
+
+      for (const property of props) {
+        if (property in this.claims.claims && !(property in this.properties)) {
+          properties.push(property)
+        }
+      }
+
+      counters[item] = properties
+    }
+
+    commit('addCounterexamples', counters)
     commit('acceptCounterexamples')
     const candidate = await step(state)
     commit('newCandidate', candidate)
