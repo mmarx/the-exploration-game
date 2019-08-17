@@ -104,7 +104,9 @@
         [new-implication counterexamples] (explore request)
         head (if (nil? new-implication) [] (conclusion new-implication))
         body (if (nil? new-implication) [] (premise new-implication))]
-    (log/info "ID:" sessionID "request" request)
+    (log/info "ID:" sessionID "request:" request)
+    (log/info "ID:" sessionID "result-imp:" new-implication
+              "result-counter:" counterexamples)
     {:status 200
      :headers {"Content-Type" "text/json"}
      :body (str (json/write-str
