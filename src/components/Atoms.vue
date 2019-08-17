@@ -1,11 +1,25 @@
 <template>
   <span>
-    <ul class="comma-separated" v-if="atoms.length">
-      <li v-for="(atom, idx) of atoms" :key="idx">
-        <entity-link :entityId="atom" />
-      </li>
-    </ul>
-    <span v-else>[empty]</span>
+    <p v-if="!compact">
+      <ol v-if="atoms.length">
+        <li v-for="(atom, idx) of atoms" :key="idx">
+          {{ atom }}: <entity-link :entityId="atom" />
+        </li>
+      </ol>
+      <span v-else>
+        <b-tooltip title="this implication applies to every item">[empty]</b-tooltip>
+      </span>
+    </p>
+    <span v-else>
+      <ul class="comma-separated" v-if="atoms.length">
+        <li v-for="(atom, idx) of atoms" :key="idx">
+          <entity-link :entityId="atom" />
+        </li>
+      </ul>
+      <span v-else>
+        <span v-b-tooltip title="this implication applies to every item">[empty]</span>
+      </span>
+    </span>
   </span>
 </template>
 

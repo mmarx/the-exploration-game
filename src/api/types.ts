@@ -21,6 +21,7 @@ export interface ExplorationRequest {
   counterexamples: Counterexamples,
   implications: Implication[],
   maxCounterexamples: number,
+  sessionId: string,
 }
 
 export interface GameConfiguration {

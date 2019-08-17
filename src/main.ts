@@ -9,13 +9,15 @@ import store from '~/store/index'
 import i18n from '~/i18n'
 import BootstrapVue from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBan, faStar, faSearch, faInfoCircle,
+import { faBan, faStar, faSearch, faInfoCircle, faCheck, faTimes,
          faArrowLeft, faArrowRight,
          faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faBan)
 library.add(faStar)
+library.add(faCheck)
+library.add(faTimes)
 library.add(faSearch)
 library.add(faArrowLeft)
 library.add(faArrowRight)

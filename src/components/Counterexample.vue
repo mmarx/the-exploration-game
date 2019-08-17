@@ -1,5 +1,5 @@
 <template>
-<p><entity-link :entityId="item" />: <atoms :atoms="properties" /></p>
+<p><entity-link :entityId="item" />: <atoms :atoms="properties" compact/></p>
 </template>
 
 <script lang="ts">

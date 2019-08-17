@@ -3,14 +3,14 @@
     <p v-if="!compact">
       <span>Is it true that every
       item</span> <span v-if="implication.body.length"> with statements for
-        <atoms :atoms="implication.body" /></span>
-      <span> also has statements for all of </span>
+        <atoms :atoms="implication.body" /> also</span>
+      <span> has statements for </span>
       <atoms :atoms="implication.head" /><span>?</span>
     </p>
     <p>
-      <atoms :atoms="implication.body" />
+      <atoms compact :atoms="implication.body" />
       <font-awesome-icon icon="arrow-right" />
-      <atoms :atoms="implication.head" />
+      <atoms compact :atoms="implication.head" />
     </p>
   </div>
 </template>

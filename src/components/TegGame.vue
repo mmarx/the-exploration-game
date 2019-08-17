@@ -4,55 +4,72 @@
       <div>
         <h1>The Exploration Game</h1>
 
-        <div><h2>current candidate</h2>
-          <p v-if="getCandidateImplication">
-            <implication :implication="getCandidateImplication" />
-          </p>
-        </div>
+        <sqid-collapsible-card id="candidate" header="Current Candidate">
+          <div>
+            <p v-if="getCandidateImplication">
+              <implication :implication="getCandidateImplication" />
+            </p>
+          </div>
 
-        <div><h2>possible counterexamples</h2>
+          <div v-if="candidateCounterexamples.length">
+            <p>There are items that do not satisfy this
+            implication. Are they valid counterexamples?
+              <ul>
+                <li v-for="([itemId, properties], idx) of candidateCounterexamples"
+                    :key="idx">
+                  <counterexample :item="itemId" :properties="properties" />
+                </li>
+              </ul>
+            </p>
+          </div>
+
           <p>
-            <ul v-if="getCandidateCounterexamples">
-              <li v-for="(itemId, idx) of Object.keys(getCandidateCounterexamples)" :key="idx">
-                <counterexample :item="itemId" :properties="getCandidateCounterexamples[itemId]" />
-              </li>
-            </ul>
+            <b-button variant="success"
+                      @click="onAccept">
+              <font-awesome-icon icon="check" />accept</b-button>
+            <b-button variant="danger"
+                      @click="onReject"
+                      disabled>
+              <font-awesome-icon icon="times" />reject</b-button>
           </p>
-        </div>
+        </sqid-collapsible-card>
 
-        <div><h2>properties</h2>
-          <p>
-            <ul class="comma-separated">
-              <li v-for="(propertyId, idx) of getProperties" :key="idx">
-                <entity-link :entityId="propertyId" />
-              </li>
-            </ul>
-          </p>
-        </div>
+        <sqid-collapsible-card id="state" header="Game State">
+          <b-tabs card>
+            <b-tab title="Implications">
+              <p>
+                <ol>
+                  <li v-for="(implication, idx) of getImplications" :key="idx">
+                    <implication :implication="implication" />
+                  </li>
+                </ol>
+              </p>
 
-        <div><h2>implications found so far</h2>
-          <p>
-            <ul class="comma-separated">
-              <li v-for="(implication, idx) of getImplications" :key="idx">
-                <implication :implication="implication" />
-              </li>
-            </ul>
-          </p>
-        </div>
-
-        <div><h2>counterexamples added so for</h2>
-          <p>
-            <ul>
-              <li v-for="(itemId, idx) of Object.keys(getCounterexamples)" :key="idx">
-                <counterexample :item="itemId" :properties="getCounterexamples[itemId]" />
-              </li>
-            </ul>
-          </p>
-        </div>
-
-        <b-button @click="onAccept">accept</b-button>
-        <b-button @click="onReject">reject</b-button>
+            </b-tab>
+            <b-tab active title="Properties">
+              <p>
+                <ol>
+                  <li v-for="(propertyId, idx) of getProperties" :key="idx">
+                    <entity-link :entityId="propertyId" />
+                  </li>
+                </ol>
+              </p>
+            </b-tab>
+            <b-tab title="Counterexamples">
+              <p>
+                <ol>
+                  <li v-for="(itemId, idx) of Object.keys(getCounterexamples)" :key="idx">
+                    <counterexample :item="itemId" :properties="getCounterexamples[itemId]" />
+                  </li>
+                </ol>
+              </p>
+            </b-tab>
+          </b-tabs>
+        </sqid-collapsible-card>
       </div>
+    </template>
+    <template v-slot:sidebar>
+      <h2>How to play</h2>
     </template>
   </sqid-bars>
 </template>
@@ -86,6 +103,12 @@ export default class TegGame extends Vue {
 
   private counter: number = 0
 
+  private get candidateCounterexamples() {
+    const candidates = this.getCandidateCounterexamples || {}
+
+    return Object.entries(candidates)
+  }
+
   private created() {
     this.newGame({
       properties: ['P161', 'P364', 'P495'],
@@ -107,3 +130,10 @@ export default class TegGame extends Vue {
   }
 }
 </script>
+
+<style lang="less" scoped>
+button {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+</style>
