@@ -18,7 +18,7 @@ import Atoms from '~/components/Atoms.vue'
 export default class Implication extends Vue {
   @Prop({ required: true }) private item!: EntityId
   @Prop({ required: true }) private properties!: EntityId[]
-  @Getter private getProperties!: () => EntityId[]
+  @Getter private getProperties!: any
   @Action private requestLabels!: (args: { entityIds: EntityId[] }) => void
   @Action private getEntityData!: any
 

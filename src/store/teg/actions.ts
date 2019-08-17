@@ -36,15 +36,15 @@ export const actions: ActionTree<TegState, RootState> = {
   },
   async rejectImplication({ commit, state, getters, dispatch }, counterexamples: Counterexamples) {
     const counters: any = counterexamples
-    const data = {}
+    const data: any = {}
     const props = getters.getProperties()
 
     for (const item of Object.keys(counters)) {
-      data[item] = await disptach('getEntityData', item) as any
+      data[item] = await dispatch('getEntityData', item) as any
       const properties = []
 
       for (const property of props) {
-        if (property in this.claims.claims && !(property in this.properties)) {
+        if (property in data[item].claims && !(property in properties)) {
           properties.push(property)
         }
       }
