@@ -21,4 +21,7 @@ export const getters: GetterTree<TegState, RootState> = {
   getCandidateCounterexamples(state) {
     return state.counterCandidates
   },
+  getSessionId(state) {
+    return state.sessionId
+  },
 }

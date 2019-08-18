@@ -31,7 +31,8 @@ export async function getNextExplorationStep(
   return response
 }
 
-export async function getNumberOfCounterexamples(implication: Implication) {
+export async function getNumberOfCounterexamples(implication: Implication,
+                                                 sessionId: string) {
   const response = await performApiRequest('howmany', {
     implication,
     sessionId,

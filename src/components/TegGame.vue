@@ -120,6 +120,7 @@ export default class TegGame extends Vue {
   @Getter private getImplications!: Implication[]
   @Getter private getCandidateImplication!: Implication | null
   @Getter private getCandidateCounterexamples!: Counterexamples | null
+  @Getter private getSessionId!: string | null
   @Action private newGame!: (configuration: GameConfiguration) => Promise<ExplorationResult>
   @Action private acceptImplication!: () => Promise<ExplorationResult>
   @Action private acceptCounterexamples!: () => Promise<ExplorationResult>
@@ -135,7 +136,8 @@ export default class TegGame extends Vue {
     if (!this.implication) {
       this.numCounterExamples = 0
     } else {
-      const num = await getNumberOfCounterexamples(this.implication)
+      const num = await getNumberOfCounterexamples(this.implication,
+                                                   this.getSessionId || '')
 
       this.numCounterExamples = num
     }
