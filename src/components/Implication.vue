@@ -4,7 +4,7 @@
       <span>Is it true that every
       item</span> <span v-if="implication.body.length"> with statements for
         <atoms :atoms="implication.body" /> also</span>
-      <span> has statements for </span>
+      <span> should have statements for </span>
       <atoms :atoms="implication.head" /><span>?</span>
     </p>
     <p>

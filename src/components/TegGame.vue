@@ -79,7 +79,7 @@
           only offer a pre-selected set here)</li>
         <li>The Exploration game will ask you questions
         about <i>implications</i>: Considering all items with
-        statements for a given set of properties, do they all also
+        statements for a given set of properties, should they all also
         have statements for the properties in the conclusion of the
           implication?</li>
         <li>For every such implication, you can choose
