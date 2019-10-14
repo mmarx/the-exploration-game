@@ -1,11 +1,16 @@
 <style scoped lang="less">
+  .about
+  {
+  margin-left: 40px;
+  margin-right: 40px
+  }
   li {
   font-size:30px
   }
 </style>
 
 <template>
-<div>
+<div class="about">
   <h1>The Exploration Game is proudly presented by:</h1>
   <ul>
     <li>
