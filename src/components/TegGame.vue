@@ -4,7 +4,7 @@
       <div>
         <h1>The Exploration Game</h1>
 
-        <sqid-collapsible-card id="candidate" header="Current Candidate">
+        <sqid-collapsible-card id="candidate" header="Current Candidate" v-if="playing">
           <div v-if="!won">
             <div>
               <p v-if="getCandidateImplication">
@@ -38,7 +38,12 @@
           </div>
         </sqid-collapsible-card>
 
-        <sqid-collapsible-card id="state" header="Game State">
+        <sqid-collapsible-card id="setup" header="Game Setup" v-if="!playing || won">
+          <teg-setup
+            @start-game="onStartGame($event)" />
+        </sqid-collapsible-card>
+
+        <sqid-collapsible-card id="state" header="Game State" v-if="playing">
           <b-tabs card>
             <b-tab title="Implications">
               <p>
@@ -106,11 +111,13 @@ import { EntityId, Counterexamples, Implication,
 import { getNumberOfCounterexamples } from '~/api/index'
 import ImplicationVue from '~/components/Implication.vue'
 import CounterexampleVue from '~/components/Counterexample.vue'
+import TegSetup from '~/components/TegSetup.vue'
 
 @Component({
   components: {
-    implication: ImplicationVue,
-    counterexample: CounterexampleVue,
+    'implication': ImplicationVue,
+    'counterexample': CounterexampleVue,
+    'teg-setup': TegSetup,
   },
 })
 export default class TegGame extends Vue {
@@ -130,6 +137,7 @@ export default class TegGame extends Vue {
   private counter: number = 0
   private numCounterExamples = 0
   private implication: Implication | null = null
+  private playing = false
 
   @Watch('implication')
   private async onCandidateChanged() {
@@ -155,11 +163,9 @@ export default class TegGame extends Vue {
     return this.implication && !this.implication.head.length && !this.implication.body.length
   }
 
-  private created() {
-    this.newGame({
-      properties: ['P50', 'P495', 'P136', 'P364'],
-      maxCounterexamples: 5,
-    })
+  private onStartGame(event: any) {
+    this.newGame(event)
+    this.playing = true
   }
 
   private onAccept() {
