@@ -1,0 +1,5 @@
+---
+- name: Copy teg bundle
+  copy:
+    src: "{{ teg_path }}/{{ teg_dist }}/"
+    dest: "{{ teg_dest }}"

@@ -1,0 +1,10 @@
+---
+backend_path: ../teg-rest
+backend_version: 0.0.01-SNAPSHOT
+backend_output: target/uberjar/
+backend_jar: "{{ backend_output }}/teg-rest-{{ backend_version }}-standalone.jar"
+teg_path: ..
+teg_dist: dist
+backend_dest: ~
+dynamic_path: ~/public_html
+teg_dest: "{{ dynamic_path }}"

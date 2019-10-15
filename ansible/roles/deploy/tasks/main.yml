@@ -1,0 +1,7 @@
+---
+- import_tasks: teg-rest.yml
+  tags: [backend]
+  become: yes
+- import_tasks: sqid.yml
+  tags: [frontend]
+  become: yes

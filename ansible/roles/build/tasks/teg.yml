@@ -1,0 +1,14 @@
+---
+- name: Clean teg
+  local_action:
+    module: file
+    args:
+      path: "{{ teg_path }}/{{ teg_dist }}"
+      state: absent
+  tags: [never, clean]
+
+- name: Build teg
+  local_action:
+    module: command npm run build
+    args:
+      chdir: "{{ teg_path }}"

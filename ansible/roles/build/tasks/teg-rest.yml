@@ -1,0 +1,14 @@
+---
+- name: Clean teg-rest
+  local_action:
+    module: command lein clean
+    args:
+      chdir: "{{ backend_path }}"
+  tags: [never, clean]
+
+- name: Build teg-rest
+  local_action:
+    module: command lein uberjar
+    args:
+      chdir: "{{ backend_path }}"
+      creates: "{{ backend_jar }}"
