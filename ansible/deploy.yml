@@ -1,5 +1,6 @@
 ---
 - hosts: teg
+  gather_facts: no
   roles:
     - deploy
   tags: [deploy]

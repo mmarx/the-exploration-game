@@ -1,5 +1,27 @@
 ---
-- name: Copy sqid-helper JAR
+- name: Ensure target directory exists
+  file:
+    path: "{{ backend_dest }}"
+    state: directory
+
+- name: Copy teg-rest JAR
   copy:
-    src: "{{ helper_path }}/{{ helper_jar }}"
-    dest: "{{ helper_dest }}"
+    src: "{{ backend_path }}/{{ backend_jar }}"
+    dest: "{{ backend_dest }}"
+  notify:
+    - "Stop backend pod"
+    - "Apply deployment configuration"
+
+- name: Copy teg-rest deployment configuration
+  template:
+    src: templates/backend.yml.j2
+    dest: "{{ home }}/backend.yml"
+  notify:
+    - "restart web services"
+
+- name: Copy lighthttpd configuration
+  copy:
+    src: files/lighthttpd.conf
+    dest: "{{ home }}/.lighthttpd.conf"
+  notify:
+    - "Restart lighthttpd"

@@ -2,6 +2,6 @@
 - import_tasks: teg-rest.yml
   tags: [backend]
   become: yes
-- import_tasks: sqid.yml
+- import_tasks: teg.yml
   tags: [frontend]
   become: yes

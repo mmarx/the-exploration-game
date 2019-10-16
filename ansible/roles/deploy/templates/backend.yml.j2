@@ -1,28 +1,29 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: teg-backend
+  name: {{ backend_deployment }}
   namespace: teg
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: teg-backend
+      name: {{ backend_deployment }}
       tier: backend
+  revisionHistoryLimit: 10
   template:
     metadata:
       labels:
-        name: teg-backend
+        name: {{ backend_deployment }}
         tier: backend
     spec:
       containers:
       - command:
         - /usr/bin/java
         - -jar
-        - teg-rest-0.0.1-SNAPSHOT-standalone.jar
+        - {{ backend_jar_name }}
         env:
         - name: HOME
-          value: /data/project/teg/
+          value: {{ home }}
         image: docker-registry.tools.wmflabs.org/toollabs-jdk8-base:latest
         name: backend
         ports:
@@ -39,7 +40,7 @@ spec:
         volumeMounts:
         - mountPath: /data/project/
           name: home
-        workingDir: /data/project/teg/
+        workingDir: {{ backend_dest }}
       volumes:
       - hostPath:
           path: /data/project/
@@ -48,10 +49,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: teg-backend
+  name: {{ backend_deployment }}
 spec:
   selector:
-    name: teg-backend
+    name: {{ backend_deployment }}
     tier: backend
   ports:
   - protocol: TCP
