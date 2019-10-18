@@ -39,3 +39,4 @@ flycheck_*.*
 /teg-rest/teg-rest.log
 /teg-rest/*.log
 .lsp
+.log
