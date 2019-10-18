@@ -13,10 +13,10 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest'
   },
   transformIgnorePatterns: [
-    '/node_modules/'
+    '/node_modules/(?!sqid/)'
   ],
   moduleNameMapper: {
-    '^~/(.*)$': '<rootDir>/src/$1'
+    '^~/(.*)$': '<rootDir>/src/$1',
     '^@/(.*)$': '<rootDir>/node_modules/sqid/src/$1'
   },
   snapshotSerializers: [
