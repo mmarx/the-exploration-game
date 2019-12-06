@@ -80,24 +80,18 @@
     <template v-slot:sidebar>
       <h2>How to play</h2>
       <ol>
-        <li>Select a set of properties to play with (currently, we
-          only offer a pre-selected set here)</li>
-        <li>The Exploration game will ask you questions
-        about <i>implications</i>: Considering all items with
-        statements for a given set of properties, should they all also
-        have statements for the properties in the conclusion of the
-          implication?</li>
-        <li>For every such implication, you can choose
-        to <i>accept</i> it, if it is a valid implication,
-        or <i>reject</i> it, if is not.</li>
-        <li>To guide you in your decision, you will
-        see <i>counterexamples</i>, i.e., items that satisfy the
-        premise of the implication, but not the
-        conclusion. Counterexamples need not be valid, they might also
-          be missing statements.</li>
-        <li>Based on your choice, The Exploration Game computes the
-        next possible implication that is consistent with your
-        choices, until all minimal implications have been found.</li>
+        <i18n tag="li" path="gameInstructions.stepOne" />
+        <i18n tag="li" path="gameInstructions.stepTwo">
+          <i place="implications">implications</i>
+        </i18n>
+        <i18n tag="li" path="gameInstructions.stepThree">
+          <i place="accept">accept</i>
+          <i place="reject">reject</i>
+        </i18n>
+        <i18n tag="li" path="gameInstructions.stepFour">
+          <i place="counterexamples">counterexamples</i>
+        </i18n>
+        <i18n tag="li" path="gameInstructions.stepFive" />
       </ol>
     </template>
   </sqid-bars>

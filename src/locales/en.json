@@ -3,6 +3,13 @@
     "start": "Start",
     "about": "About"
   },
+  "gameInstructions": {
+    "stepOne": "Select properties to play with. For this, either type in property names or property numbers, e.g., P569. Currently, we do not offer pre-selected meaningful sets here.",
+    "stepTwo": "The Exploration game will ask you questions about {implications}: Considering all items with statements for a given set of properties, should they all also have statements for the properties in the conclusion of the implication?",
+    "stepThree": "For every such implication, you can choose to {accept} it, if it is a valid implication, or {reject} it, if is not.",
+    "stepFour": "To guide you in your decision, you will see {counterexamples}, i.e., items that satisfy the premise of the implication, but not the conclusion. Counterexamples need not be valid, they might also be missing statements.",
+    "stepFive": "Based on your choice, The Exploration Game computes the next possible implication that is consistent with your choices, until all minimal implications have been found."
+  },
   "footer": {
     "poweredBy": "Powered by",
     "sourceCode": "Source code available on {0}"
