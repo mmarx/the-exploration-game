@@ -3,6 +3,14 @@
     "start": "Start",
     "about": "About"
   },
+  "game": {
+    "acceptText": "accept this implication",
+    "rejectText": "reject this implication",
+    "counterExamplesText": "There are {numOfCounterExamples} items that do not satisfy this implication. {someOfThem} Are they valid counterexamples?",
+    "someOfThem": "Here are some of them.",
+    "congrats": "Congratulations, you have {won} The Exploration Game!",
+    "won": "won"
+  },
   "gameInstructions": {
     "stepOne": "Select properties to play with. For this, either type in property names or property numbers, e.g., P569. Currently, we do not offer pre-selected meaningful sets here.",
     "stepTwo": "The Exploration game will ask you questions about {implications}: Considering all items with statements for a given set of properties, should they all also have statements for the properties in the conclusion of the implication?",
@@ -19,3 +27,4 @@
     "pageNotFoundDescription": "There seems to be an error in the URI you followed here."
   }
 }
+

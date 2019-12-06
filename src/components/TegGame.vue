@@ -15,15 +15,17 @@
             <p>
               <b-button variant="success"
                         @click="onAccept">
-                <font-awesome-icon icon="check" />accept this implication</b-button>
+                <font-awesome-icon icon="check" />{{ $t('game.acceptText') }}</b-button>
               <b-button variant="danger"
                         @click="onReject">
-                <font-awesome-icon icon="times" />reject this implication</b-button>
+                <font-awesome-icon icon="times" />{{ $t('game.rejectText') }}</b-button>
             </p>
-
             <div v-if="candidateCounterexamples.length">
-              <p>There are <span v-if="numCounterExamples">{{ numCounterExamples }} </span>items that do not satisfy this
-                implication. <span v-if="numCounterExamples">Here are some of them. </span>Are they valid counterexamples?
+              <i18n tag="p" path="game.counterExamplesText">
+                <span v-if="numCounterExamples" place="numOfCounterExamples">{{numCounterExamples}}</span>
+               <span v-if="numCounterExamples" place="someOfThem">{{ $t('game.someOfThem') }}</span>
+              </i18n>
+              <p>
                 <ul>
                   <li v-for="([itemId, properties], idx) of candidateCounterexamples"
                       :key="idx">
@@ -34,7 +36,9 @@
             </div>
           </div>
           <div v-else>
-            <p>Congratulations, you have <i>won</i> The Exploration Game!</p>
+            <i18n tag="p" path="game.congrats">
+              <i place="won">{{ $t('game.won') }}</i>
+            </i18n>
           </div>
         </sqid-collapsible-card>
 
