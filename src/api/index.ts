@@ -84,8 +84,8 @@ export function counterExampleQueryForImplication(implication: Implication,
       break
   }
 
-  const premise = patternForPremise(implication.head)
-  const conclusion = patternForConclusion(implication.body)
+  const premise = patternForPremise(implication.body)
+  const conclusion = patternForConclusion(implication.head)
 
   return `${verb} WHERE {
   ${premise}
@@ -112,6 +112,6 @@ function patternForConclusion(head: Atom[]) {
 export async function getNumberOfCounterexamples(implication: Implication,
                                                  _: string) {
   const response = await sparqlQuery(counterExampleQueryForImplication(implication,
-                                                                       { type: 'count', limit: 1001 }))
-  return ((response[0] as any) as CountResult).entities.value || 0
+                                                                       { type: 'retrieve', limit: 1001 }))
+  return response.length
 }

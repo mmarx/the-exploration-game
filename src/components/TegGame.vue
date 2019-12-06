@@ -22,7 +22,8 @@
             </p>
             <div v-if="candidateCounterexamples.length">
               <i18n tag="p" path="game.counterExamplesText">
-                <span v-if="numCounterExamples" place="numOfCounterExamples">{{numCounterExamples}}</span>
+                <span v-if="numCounterExamples <= 1000" place="numOfCounterExamples">{{numCounterExamples}}</span>
+                <span v-else-if="numCounterExamples === 1001" place="numOfCounterExamples">{{ $t('game.tooManyCounterexamples') }}</span>
                <span v-if="numCounterExamples" place="someOfThem">{{ $t('game.someOfThem') }}</span>
               </i18n>
               <p>

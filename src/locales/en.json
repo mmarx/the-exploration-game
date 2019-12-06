@@ -8,6 +8,7 @@
     "rejectText": "reject this implication",
     "counterExamplesText": "There are {numOfCounterExamples} items that do not satisfy this implication. {someOfThem} Are they valid counterexamples?",
     "someOfThem": "Here are some of them.",
+    "tooManyCounterexamples": "more than 1000",
     "congrats": "Congratulations, you have {won} The Exploration Game!",
     "won": "won"
   },
@@ -27,4 +28,3 @@
     "pageNotFoundDescription": "There seems to be an error in the URI you followed here."
   }
 }
-
