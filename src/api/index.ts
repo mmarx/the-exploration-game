@@ -70,9 +70,9 @@ export function counterExampleQueryForImplication(implication: Implication,
       break
 
     case 'count':
-      verb = 'SELECT (COUNT(?entity) AS ?entities)'
+      verb = 'SELECT (COUNT(?entity) AS ?entities) WHERE { SELECT ?entity '
       limit = ((queryType.limit !== null)
-               ? `LIMIT ${queryType.limit}`
+               ? `LIMIT ${queryType.limit} }`
                : '')
       break
 
@@ -112,6 +112,6 @@ function patternForConclusion(head: Atom[]) {
 export async function getNumberOfCounterexamples(implication: Implication,
                                                  _: string) {
   const response = await sparqlQuery(counterExampleQueryForImplication(implication,
-                                                                       { type: 'count', limit: 1000 }))
+                                                                       { type: 'count', limit: 1001 }))
   return ((response[0] as any) as CountResult).entities.value || 0
 }
