@@ -7,14 +7,29 @@
     </b-row>
     <b-row>
       <b-col>
-        <property-search-box
-          @selected-property="onSelectedProperty($event.id)"
-          />
+        <h3>Presets</h3>
+      </b-col>
+      <b-col>
+        <h3>Custom Properties</h3>
       </b-col>
     </b-row>
     <b-row>
-      <b-col sm="3" />
-      <b-col sm="9">
+      <b-col >
+        <ol>
+          <li v-for="(preset, idx) of presets" :key="idx">
+            <b-button
+              @click="onSelectedPreset(preset)">
+              {{ preset.description }}
+            </b-button>
+            <p><atoms compact :atoms="preset.properties" /></p>
+          </li>
+        </ol>
+      </b-col>
+      <b-col>
+        <property-search-box
+          @selected-property="onSelectedProperty($event.id)"
+          />
+        <h3 style="padding-top: .5em">Current selection</h3>
         <ol>
           <li v-for="(propertyId, idx) of properties" :key="idx">
             <entity-link :entityId="propertyId" />
@@ -56,16 +71,44 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { EntityId } from '@/api/types'
+import { Preset } from '~/api/types'
 import TegPropertySearchBox from '~/components/PropertySearchBox.vue'
+import Atoms from '~/components/Atoms.vue'
 
 @Component({
   components: {
     'property-search-box': TegPropertySearchBox,
+    Atoms,
   },
 })
 export default class TegSetup extends Vue {
   private properties: EntityId[] = []
   private maxCounterexamples: number = 5
+  private presets: Preset[] = [
+    // { description: 'empty',
+    //   properties: [],
+    // },
+    { description: 'Countries & Borders',
+      properties: ['P17', 'P30', 'P47'],
+    },
+    { description: 'Credit Cards',
+      properties: ['P4443', 'P137', 'P2555'],
+    },
+    {
+      description: 'Use of Energy',
+      properties: ['P618', 'P366'],
+    },
+    { description: 'Memory & Computation',
+      properties: ['P880', 'P2928'],
+    },
+    { description: 'Space launches',
+      properties: ['P619', 'P620'],
+    },
+  ]
+
+  private onSelectedPreset(preset: Preset) {
+    this.properties = preset.properties
+  }
 
   private onSelectedProperty(propertyId: EntityId) {
     if (!this.properties.includes(propertyId)) {

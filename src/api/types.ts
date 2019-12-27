@@ -29,6 +29,11 @@ export interface GameConfiguration {
   maxCounterexamples: number,
 }
 
+export interface Preset {
+  description: string,
+  properties: EntityId[],
+}
+
 export class GameOverError extends Error {
   constructor() {
     super('Game over, Player one. Be vigilant.')
