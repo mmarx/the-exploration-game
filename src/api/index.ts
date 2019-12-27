@@ -70,14 +70,14 @@ export function counterExampleQueryForImplication(implication: Implication,
       break
 
     case 'count':
-      verb = 'SELECT (COUNT(?entity) AS ?entities) WHERE { SELECT ?entity '
+      verb = 'SELECT (COUNT(DISTINCT ?entity) AS ?entities) WHERE { SELECT ?entity '
       limit = ((queryType.limit !== null)
                ? `LIMIT ${queryType.limit} }`
                : '')
       break
 
     case 'retrieve':
-      verb = 'SELECT ?entity'
+      verb = 'SELECT DISTINCT ?entity'
       limit = ((queryType.limit !== null)
                ? `LIMIT ${queryType.limit}`
                : '')

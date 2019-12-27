@@ -1,7 +1,7 @@
 <template>
   <a  :href="destination"
       :title="tooltip"
-      @click.native="$event.stopImmediatePropagation()">{{ label }}</a>
+      @click="$event.stopImmediatePropagation()">{{ label }}</a>
 </template>
 
 <script lang="ts">
