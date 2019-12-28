@@ -128,5 +128,5 @@ export async function getNumberOfCounterexamples(implication: Implication,
 export async function getSupport(implication: Implication) {
   const response = await sparqlQuery(supportQueryForImplication(implication, 1001))
 
-  return response[0].entities.value
+  return Number.parseInt(response[0].entities.value, 10)
 }
