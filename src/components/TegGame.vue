@@ -147,6 +147,7 @@ export default class TegGame extends Vue {
   private async onCandidateChanged() {
     if (!this.implication) {
       this.numCounterExamples = 0
+      this.support = 0
     } else {
       const num = await getNumberOfCounterexamples(this.implication,
                                                    this.getSessionId || '')
