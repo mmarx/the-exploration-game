@@ -8,7 +8,9 @@
     "rejectText": "reject this implication",
     "counterExamplesText": "There are {numOfCounterExamples} items that do not satisfy this implication. {someOfThem} Are they valid counterexamples?",
     "someOfThem": "Here are some of them.",
+    "supportText": "There are {support} items that support this implication.",
     "tooManyCounterexamples": "more than 1000",
+    "tooMuchSupport": "more than 1000",
     "congrats": "Congratulations, you have {won} The Exploration Game!",
     "won": "won"
   },

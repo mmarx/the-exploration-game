@@ -20,9 +20,13 @@
                         @click="onReject">
                 <font-awesome-icon icon="times" />{{ $t('game.rejectText') }}</b-button>
             </p>
+            <i18n tag="p" path="game.supportText">
+              <span v-if="support <= 1000" place="support">{{ support }}</span>
+              <span v-else-if="support === 1001" place="support">{{ $t('game.tooMuchSupport') }}</span>
+            </i18n>
             <div v-if="candidateCounterexamples.length">
               <i18n tag="p" path="game.counterExamplesText">
-                <span v-if="numCounterExamples <= 1000" place="numOfCounterExamples">{{numCounterExamples}}</span>
+                <span v-if="numCounterExamples <= 1000" place="numOfCounterExamples">{{ numCounterExamples }}</span>
                 <span v-else-if="numCounterExamples === 1001" place="numOfCounterExamples">{{ $t('game.tooManyCounterexamples') }}</span>
                <span v-if="numCounterExamples" place="someOfThem">{{ $t('game.someOfThem') }}</span>
               </i18n>
@@ -107,7 +111,7 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator'
 import { Getter, Action, Mutation } from 'vuex-class'
 import { EntityId, Counterexamples, Implication,
          ExplorationResult, GameConfiguration } from '~/api/types'
-import { getNumberOfCounterexamples } from '~/api/index'
+import { getNumberOfCounterexamples, getSupport } from '~/api/index'
 import ImplicationVue from '~/components/Implication.vue'
 import CounterexampleVue from '~/components/Counterexample.vue'
 import TegSetup from '~/components/TegSetup.vue'
@@ -133,6 +137,7 @@ export default class TegGame extends Vue {
   @Mutation private rejectCounterexample!: (itemId: EntityId) => void
   @Mutation private addCounterexamples!: (counterexamples: Counterexamples) => void
 
+  private support: number = 0
   private counter: number = 0
   private numCounterExamples = 0
   private implication: Implication | null = null
@@ -145,8 +150,9 @@ export default class TegGame extends Vue {
     } else {
       const num = await getNumberOfCounterexamples(this.implication,
                                                    this.getSessionId || '')
-
+      const sup = await getSupport(this.implication)
       this.numCounterExamples = num
+      this.support = sup
     }
   }
 

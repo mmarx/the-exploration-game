@@ -93,6 +93,15 @@ export function counterExampleQueryForImplication(implication: Implication,
 } ${limit}`
 }
 
+export function supportQueryForImplication(implication: Implication, limit: number) {
+  const atoms = implication.body.concat(implication.head)
+  const rule = patternForPremise(atoms)
+
+  return `SELECT (COUNT(DISTINCT ?entity) AS ?entities) WHERE {
+  ${rule}
+} LIMIT ${limit}`
+}
+
 function patternForPremise(body: Atom[]) {
   if (!body.length) {
     return `?entity ?someProperty [] .
@@ -114,4 +123,10 @@ export async function getNumberOfCounterexamples(implication: Implication,
   const response = await sparqlQuery(counterExampleQueryForImplication(implication,
                                                                        { type: 'retrieve', limit: 1001 }))
   return response.length
+}
+
+export async function getSupport(implication: Implication) {
+  const response = await sparqlQuery(supportQueryForImplication(implication, 1001))
+
+  return response[0].entities.value
 }
