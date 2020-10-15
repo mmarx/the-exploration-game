@@ -22,6 +22,6 @@
 - name: Copy lighthttpd configuration
   copy:
     src: files/lighthttpd.conf
-    dest: "{{ home }}/.lighthttpd.conf"
+    dest: "{{ home }}/.lighttpd.conf"
   notify:
     - "Restart lighthttpd"
