@@ -147,7 +147,11 @@
   (GET "/api/version" [] version)
   (GET "/api/explore" [] exploration-handler)
   (GET "/api/howmany" [] howmany-handler)
-  (route/gnot-found "Error, page not found!"))
+  (fn [{uri :uri}] {:status 404
+                    :body (str "Error, page `"
+                               uri
+                               "' not found!")
+                    }))
 
 (defonce server (atom nil))
 
