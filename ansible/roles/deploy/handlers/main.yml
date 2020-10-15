@@ -10,8 +10,8 @@
   listen:
     - "restart web services"
 
-- name: Restart lighthttpd
-  command: webservice --backend=kubernetes php7.2 restart
+- name: Restart lighttpd
+  command: webservice --backend=kubernetes php7.3 restart
   become: yes
   listen:
     - "restart web services"

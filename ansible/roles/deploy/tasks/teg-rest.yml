@@ -19,9 +19,9 @@
   notify:
     - "restart web services"
 
-- name: Copy lighthttpd configuration
+- name: Copy lighttpd configuration
   copy:
-    src: files/lighthttpd.conf
+    src: files/lighttpd.conf
     dest: "{{ home }}/.lighttpd.conf"
   notify:
-    - "Restart lighthttpd"
+    - "Restart lighttpd"
