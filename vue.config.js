@@ -4,9 +4,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  publicPath: (process.env.NODE_ENV === 'production'
-               ? '/teg/'
-               : '/'),
+  publicPath: '/',
   pluginOptions: {
     i18n: {
       locale: 'en',
@@ -21,7 +19,7 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/teg/api': {
+      '/api': {
         target: 'http://localhost:4223',
       }
     }

@@ -18,7 +18,7 @@
 
 
 (def banner
-  (str "\nhttps://tools.wmflabsorg/teg/ \nusing conexp-clj/"
+  (str "\nhttps://teg.toolforge.org/\nusing conexp-clj/"
        (conexp-version)
        "\n\n"))
 
@@ -27,8 +27,8 @@
   {:status  200
    :headers {"Content-Type" "text/html"}
    :body "This is backend for 'The Exploration game'. See <a
-   href='https://tools.wmflabs.org/teg/ for more
-   details'>https://tools.wmflabs.org/teg/</a>."})
+   href='https://teg.toolforge.org/ for more
+   details'>https://teg.toolforge.org/</a>."})
 
 (defn version [req]
    {:status  200
@@ -142,12 +142,12 @@
 
 (defroutes app-routes
   (GET "/" [] simple-body-page)
-  (GET "/teg/api/" [] simple-body-page)
+  (GET "/api/" [] simple-body-page)
   (GET "/version" [] version)
-  (GET "/teg/api/version" [] version)
-  (GET "/teg/api/explore" [] exploration-handler)
-  (GET "/teg/api/howmany" [] howmany-handler)
-  (route/not-found "Error, page not found!"))
+  (GET "/api/version" [] version)
+  (GET "/api/explore" [] exploration-handler)
+  (GET "/api/howmany" [] howmany-handler)
+  (route/gnot-found "Error, page not found!"))
 
 (defonce server (atom nil))
 

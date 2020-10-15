@@ -6,7 +6,7 @@ import { sparqlRequest } from '@/api'
 import { SparqlBinding } from '@/api/types'
 import { sparqlEndpoint } from '@/api/endpoints'
 
-const backendEndpoint = '/teg/api/'
+const backendEndpoint = '/api/'
 
 async function performApiRequest(action: string,
                                  request: ExplorationRequest): Promise<ExplorationResult> {
@@ -36,7 +36,7 @@ export async function getNextExplorationStep(
 
 export async function sparqlQuery(query: string): Promise<SparqlBinding[]> {
   const response = await sparqlRequest(sparqlEndpoint,
-                                       `#TOOL:TEG, https://tools.wmflabs.org/teg/
+                                       `#TOOL:TEG, https://teg.toolforge.org/
 ${query}`)
   return response.results.bindings
 }
