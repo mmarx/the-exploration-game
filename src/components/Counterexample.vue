@@ -15,7 +15,7 @@ import Atoms from '~/components/Atoms.vue'
     Atoms,
   },
 })
-export default class Implication extends Vue {
+export default class Counterexample extends Vue {
   @Prop({ required: true }) private item!: EntityId
   @Prop({ required: true }) private properties!: EntityId[]
   @Getter private getProperties!: any
