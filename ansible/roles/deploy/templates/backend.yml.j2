@@ -36,15 +36,17 @@ spec:
             memory: 4Gi
           requests:
             cpu: 125m
-            memory: 4Gi
+            memory: 3.5Gi
         volumeMounts:
-        - mountPath: /data/project/
+        - mountPath: /data/project
           name: home
         workingDir: {{ backend_dest }}
       volumes:
       - hostPath:
-          path: /data/project/
+          path: /data/project
         name: home
+      nodeSelector:
+        kubernetes.wmcloud.org/nfs-mounted: "true"
 ---
 apiVersion: v1
 kind: Service
